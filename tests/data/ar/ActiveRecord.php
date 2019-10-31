@@ -7,6 +7,8 @@
 
 namespace yiiunit\data\ar;
 
+use yii\db\Connection;
+
 /**
  * ActiveRecord is ...
  *
@@ -17,7 +19,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
 {
     public static $db;
 
-    public static function getDb()
+    public static function getDb(): Connection
     {
         return self::$db;
     }

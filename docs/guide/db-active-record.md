@@ -124,7 +124,7 @@ class Customer extends ActiveRecord
 {
     // ...
 
-    public static function getDb()
+    public static function getDb(): Connection
     {
         // use the "db2" application component
         return \Yii::$app->db2;  

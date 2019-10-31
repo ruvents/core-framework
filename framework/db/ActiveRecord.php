@@ -113,7 +113,7 @@ class ActiveRecord extends BaseActiveRecord
      * This will only set defaults for attributes that are `null`.
      * @return $this the model instance itself.
      */
-    public function loadDefaultValues($skipIfSet = true)
+    public function loadDefaultValues($skipIfSet = true): self
     {
         foreach (static::getTableSchema()->columns as $column) {
             if ($column->defaultValue !== null && (!$skipIfSet || $this->{$column->name} === null)) {
@@ -130,7 +130,7 @@ class ActiveRecord extends BaseActiveRecord
      * You may override this method if you want to use a different database connection.
      * @return Connection the database connection used by this AR class.
      */
-    public static function getDb()
+    public static function getDb(): Connection
     {
         return Yii::$app->getDb();
     }
