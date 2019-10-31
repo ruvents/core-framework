@@ -16,7 +16,7 @@ namespace yiiunit\data\ar;
  */
 class Item extends ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'item';
     }

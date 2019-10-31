@@ -55,7 +55,7 @@ class Customer extends ActiveRecord
    /**
     * @return string the name of the table associated with this ActiveRecord class.
     */
-   public static function tableName()
+   public static function tableName(): string
    {
        return 'customer';
    }
@@ -1015,7 +1015,7 @@ O Active Record lhe permite declarar relações entre classes Active Record que 
 // Customer está associado a tabela "customer" em um banco de dados relacional (ex. MySQL)
 class Customer extends \yii\db\ActiveRecord
 {
-   public static function tableName()
+   public static function tableName(): string
    {
        return 'customer';
    }

@@ -80,7 +80,7 @@ class Customer extends ActiveRecord
     /**
      * @return string the name of the table associated with this ActiveRecord class.
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{customer}}';
     }
@@ -1426,7 +1426,7 @@ different servers. You can use the same syntax to perform relational queries. Fo
 // Customer is associated with the "customer" table in a relational database (e.g. MySQL)
 class Customer extends \yii\db\ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'customer';
     }

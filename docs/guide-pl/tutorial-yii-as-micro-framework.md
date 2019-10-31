@@ -159,7 +159,7 @@ use yii\db\ActiveRecord;
 
 class Post extends ActiveRecord
 { 
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{posts}}';
     }

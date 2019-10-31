@@ -13,7 +13,7 @@ namespace yiiunit\data\ar;
  */
 class Alpha extends ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'alpha';
     }

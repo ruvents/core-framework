@@ -80,7 +80,7 @@ class Customer extends ActiveRecord
     /**
      * @return string このアクティブ・レコード・クラスと関連付けられるテーブルの名前
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{customer}}';
     }
@@ -1426,7 +1426,7 @@ $customer->unlink('orders', $customer->orders[0]);
 // Customer はリレーショナル・データベース (例えば MySQL) の "customer" テーブルと関連付けられている
 class Customer extends \yii\db\ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'customer';
     }

@@ -250,7 +250,7 @@ class ActiveRecordTimestamp extends ActiveRecord
         return static::$behaviors;
     }
 
-    public static function tableName()
+    public static function tableName(): string
     {
         return static::$tableName;
     }

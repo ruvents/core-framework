@@ -117,7 +117,7 @@ class ActiveRecordBlameableConsole extends ActiveRecord
         ];
     }
 
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'test_blame';
     }

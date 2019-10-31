@@ -76,7 +76,7 @@ class Customer extends ActiveRecord
     /**
      * @return string nazwa tabeli powiązanej z klasą ActiveRecord.
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{customer}}';
     }
@@ -1259,7 +1259,7 @@ Do wykonania relacyjnych zapytań używa się takich samych procedur, jak w przy
 // Customer jest powiązany z tabelą "customer" w relacyjnej bazie danych (np. MySQL)
 class Customer extends \yii\db\ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'customer';
     }

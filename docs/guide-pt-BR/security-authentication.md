@@ -49,7 +49,7 @@ use yii\web\IdentityInterface;
 
 class User extends ActiveRecord implements IdentityInterface
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'user';
     }

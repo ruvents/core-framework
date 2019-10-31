@@ -307,7 +307,7 @@ class ActiveRecordTest extends \yiiunit\framework\db\ActiveRecordTest
 
 class BoolAR extends ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'bool_values';
     }
@@ -319,7 +319,7 @@ class UserAR extends ActiveRecord
     const STATUS_ACTIVE = 10;
     const ROLE_USER = 10;
 
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{%bool_user}}';
     }

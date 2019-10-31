@@ -13,7 +13,7 @@ class ValidatorTestMainModel extends ActiveRecord
 {
     public $testMainVal = 1;
 
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'validator_main';
     }

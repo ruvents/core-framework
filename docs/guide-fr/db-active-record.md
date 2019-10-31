@@ -80,7 +80,7 @@ class Customer extends ActiveRecord
     /**
      * @return string le nom de la table associée à cette classe d'enregistrement actif.
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'customer';
     }
@@ -1425,7 +1425,7 @@ Vous pouvez utiliser la même syntaxe pour effectuer des requêtes relationnelle
 // Customer est associé à la table "customer" dans la base de données relationnelle (e.g. MySQL)
 class Customer extends \yii\db\ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'customer';
     }

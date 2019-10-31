@@ -17,7 +17,7 @@ namespace yiiunit\data\ar;
  */
 class OrderWithNullFK extends ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'order_with_null_fk';
     }

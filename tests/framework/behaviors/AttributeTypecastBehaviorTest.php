@@ -298,7 +298,7 @@ class ActiveRecordAttributeTypecast extends ActiveRecord
         ];
     }
 
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'test_attribute_typecast';
     }

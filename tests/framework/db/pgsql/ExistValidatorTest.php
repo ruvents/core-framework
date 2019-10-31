@@ -39,14 +39,14 @@ class ExistValidatorTest extends \yiiunit\framework\validators\ExistValidatorTes
 
 class ValidatorTestRefModel extends \yiiunit\data\validators\models\ValidatorTestRefModel
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'validatorRef';
     }
 }
 class ValidatorTestMainModel extends \yiiunit\data\validators\models\ValidatorTestRefModel
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'validatorMain';
     }

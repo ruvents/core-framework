@@ -251,7 +251,7 @@ class ActiveRecordSluggable extends ActiveRecord
         ];
     }
 
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'test_slug';
     }
@@ -272,7 +272,7 @@ class ActiveRecordSluggable extends ActiveRecord
 
 class ActiveRecordRelated extends ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'test_slug_related';
     }

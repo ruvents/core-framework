@@ -79,7 +79,7 @@ class Customer extends ActiveRecord
     /**
      * @return string название таблицы, сопоставленной с этим ActiveRecord-классом.
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{customer}}';
     }
@@ -1382,7 +1382,7 @@ Active Record позволяет вам объявить связи между �
 // Объект Customer соответствует таблице "customer" в реляционной базе данных (например MySQL)
 class Customer extends \yii\db\ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'customer';
     }

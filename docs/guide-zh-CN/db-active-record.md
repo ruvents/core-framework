@@ -80,7 +80,7 @@ class Customer extends ActiveRecord
     /**
      * @return string Active Record 类关联的数据库表名称
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{customer}}';
     }
@@ -1426,7 +1426,7 @@ Active Record 允许您在不同数据库驱动的 Active Record 类之间声明
 // Customer 对应的表是关系数据库中（比如 MySQL）的 "customer" 表
 class Customer extends \yii\db\ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'customer';
     }

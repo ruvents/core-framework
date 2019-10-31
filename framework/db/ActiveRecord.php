@@ -37,7 +37,7 @@ use yii\helpers\StringHelper;
  *
  * class Customer extends \yii\db\ActiveRecord
  * {
- *     public static function tableName()
+ *     public static function tableName(): string
  *     {
  *         return 'customer';
  *     }
@@ -418,7 +418,7 @@ class ActiveRecord extends BaseActiveRecord
      * if the table is not named after this convention.
      * @return string the table name
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{%' . Inflector::camel2id(StringHelper::basename(get_called_class()), '_') . '}}';
     }

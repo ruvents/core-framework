@@ -19,7 +19,7 @@ class ValidatorTestRefModel extends ActiveRecord
     public $test_val = 2;
     public $test_val_fail = 99;
 
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'validator_ref';
     }

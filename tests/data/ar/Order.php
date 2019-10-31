@@ -24,7 +24,7 @@ class Order extends ActiveRecord
 {
     public static $tableName;
 
-    public static function tableName()
+    public static function tableName(): string
     {
         return static::$tableName ?: 'order';
     }

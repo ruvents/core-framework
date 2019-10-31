@@ -14,7 +14,7 @@ namespace yiiunit\data\ar;
  */
 class Beta extends ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'beta';
     }

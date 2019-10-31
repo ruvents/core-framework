@@ -30,7 +30,7 @@ class Customer extends ActiveRecord
 
     public $sumTotal;
 
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'customer';
     }

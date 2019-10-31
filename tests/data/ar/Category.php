@@ -15,7 +15,7 @@ namespace yiiunit\data\ar;
  */
 class Category extends ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'category';
     }

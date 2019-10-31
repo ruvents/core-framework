@@ -15,7 +15,7 @@ namespace yiiunit\data\ar;
  */
 class DefaultPk extends ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'default_pk';
     }

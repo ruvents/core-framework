@@ -18,7 +18,7 @@ class Animal extends ActiveRecord
 {
     public $does;
 
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'animal';
     }

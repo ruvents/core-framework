@@ -21,7 +21,7 @@ namespace yiiunit\data\ar;
  */
 class OrderWithConstructor extends ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'order';
     }

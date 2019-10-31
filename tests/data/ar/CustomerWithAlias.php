@@ -21,12 +21,12 @@ class CustomerWithAlias extends ActiveRecord
     public $status2;
 
     public $sumTotal;
-    
-    public static function tableName()
+
+    public static function tableName(): string
     {
         return 'customer';
     }
-    
+
     /**
      * {@inheritdoc}
      * @return CustomerQuery
