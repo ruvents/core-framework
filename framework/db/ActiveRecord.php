@@ -113,7 +113,7 @@ class ActiveRecord extends BaseActiveRecord
      * This will only set defaults for attributes that are `null`.
      * @return $this the model instance itself.
      */
-    public function loadDefaultValues($skipIfSet = true): self
+    public function loadDefaultValues(bool $skipIfSet = true): self
     {
         foreach (static::getTableSchema()->columns as $column) {
             if ($column->defaultValue !== null && (!$skipIfSet || $this->{$column->name} === null)) {
