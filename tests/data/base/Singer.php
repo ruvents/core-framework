@@ -18,7 +18,7 @@ class Singer extends Model
     public $lastName;
     public $test;
 
-    public function rules()
+    public function rules(): array
     {
         return [
             [['lastName'], 'default', 'value' => 'Lennon'],

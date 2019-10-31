@@ -1963,7 +1963,7 @@ class HtmlTestModel extends DynamicModel
         }
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             ['name', 'required'],

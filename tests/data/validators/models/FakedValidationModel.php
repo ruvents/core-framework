@@ -33,7 +33,7 @@ class FakedValidationModel extends Model
         return $m;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             [['val_attr_a', 'val_attr_b'], 'required', 'on' => 'reqTest'],

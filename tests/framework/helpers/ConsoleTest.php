@@ -225,7 +225,7 @@ class ConsoleTest extends TestCase
  */
 class TestConsoleModel extends DynamicModel
 {
-    public function rules()
+    public function rules(): array
     {
         return [
             ['name', 'required'],

@@ -153,7 +153,7 @@ class Model extends Component implements StaticInstanceInterface, IteratorAggreg
      * @return array validation rules
      * @see scenarios()
      */
-    public function rules()
+    public function rules(): array
     {
         return [];
     }

@@ -14,7 +14,7 @@ use yii\base\Model;
  */
 class InvalidRulesModel extends Model
 {
-    public function rules()
+    public function rules(): array
     {
         return [
             ['test'],

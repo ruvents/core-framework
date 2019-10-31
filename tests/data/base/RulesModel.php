@@ -21,7 +21,7 @@ class RulesModel extends Model
 
     public $rules = [];
 
-    public function rules()
+    public function rules(): array
     {
         return $this->rules;
     }

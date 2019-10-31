@@ -303,7 +303,7 @@ class ActiveRecordAttributeTypecast extends ActiveRecord
         return 'test_attribute_typecast';
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             ['name', 'string'],

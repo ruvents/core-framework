@@ -359,24 +359,24 @@ class DataFilter extends Model
         if ($validator instanceof BooleanValidator) {
             return self::TYPE_BOOLEAN;
         }
-        
+
         if ($validator instanceof NumberValidator) {
             return $validator->integerOnly ? self::TYPE_INTEGER : self::TYPE_FLOAT;
         }
-        
+
         if ($validator instanceof StringValidator) {
             return self::TYPE_STRING;
         }
-        
+
         if ($validator instanceof EachValidator) {
             return self::TYPE_ARRAY;
         }
-        
+
         if ($validator instanceof DateValidator) {
             if ($validator->type == DateValidator::TYPE_DATETIME) {
                 return self::TYPE_DATETIME;
             }
-            
+
             if ($validator->type == DateValidator::TYPE_TIME) {
                 return self::TYPE_TIME;
             }
@@ -480,7 +480,7 @@ class DataFilter extends Model
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [$this->filterAttributeName, 'validateFilter', 'skipOnEmpty' => false],

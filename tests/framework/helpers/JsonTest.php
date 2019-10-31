@@ -230,7 +230,7 @@ class JsonModel extends DynamicModel implements \JsonSerializable
         return $this->data;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             ['name', 'required'],
