@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b38dbd7018d72a985214de2c902c7ea2",
+    "content-hash": "2629bfdc49ee3b6ae7e2bb7785b75929",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -661,31 +661,31 @@
         },
         {
             "name": "johnkary/phpunit-speedtrap",
-            "version": "v1.0.2",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnkary/phpunit-speedtrap.git",
-                "reference": "ad242a6e84b0d63d2e50832babad77d6d545bc0a"
+                "reference": "dac11b8640d4be7a70f336616947fa84f169835a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnkary/phpunit-speedtrap/zipball/ad242a6e84b0d63d2e50832babad77d6d545bc0a",
-                "reference": "ad242a6e84b0d63d2e50832babad77d6d545bc0a",
+                "url": "https://api.github.com/repos/johnkary/phpunit-speedtrap/zipball/dac11b8640d4be7a70f336616947fa84f169835a",
+                "reference": "dac11b8640d4be7a70f336616947fa84f169835a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6",
-                "phpunit/phpunit": ">=4.7"
+                "php": ">=7.1",
+                "phpunit/phpunit": "^7.0 || ^8.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "JohnKary": "src/"
+                "psr-4": {
+                    "JohnKary\\PHPUnit\\Listener\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -705,7 +705,7 @@
                 "profile",
                 "slow"
             ],
-            "time": "2017-02-13T15:22:35+00:00"
+            "time": "2019-02-24T02:40:12+00:00"
         },
         {
             "name": "myclabs/deep-copy",
