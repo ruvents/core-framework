@@ -130,7 +130,7 @@ class ActiveRecord extends BaseActiveRecord
      * You may override this method if you want to use a different database connection.
      * @return Connection the database connection used by this AR class.
      */
-    public static function getDb(): Connection
+    public static function getDb(): \yii\db\Connection
     {
         return Yii::$app->getDb();
     }
