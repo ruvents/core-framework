@@ -153,7 +153,7 @@ class ActiveRecord extends BaseActiveRecord
      * @param array $params parameters to be bound to the SQL statement during execution.
      * @return ActiveQuery the newly created [[ActiveQuery]] instance
      */
-    public static function findBySql($sql, $params = [])
+    public static function findBySql(string $sql, array $params = []): \yii\db\ActiveQuery
     {
         $query = static::find();
         $query->sql = $sql;
