@@ -7,13 +7,6 @@
 
 namespace yii\db;
 
-use Yii;
-use yii\base\InvalidArgumentException;
-use yii\base\InvalidConfigException;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Inflector;
-use yii\helpers\StringHelper;
-
 /**
  * ActiveRecord is the base class for classes representing relational data in terms of objects.
  *
@@ -132,7 +125,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      */
     public static function getDb(): \yii\db\Connection
     {
-        return Yii::$app->getDb();
+        return \Yii::$app->getDb();
     }
 
     /**
@@ -166,7 +159,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * This method is internally called by [[findOne()]] and [[findAll()]].
      * @param mixed $condition please refer to [[findOne()]] for the explanation of this parameter
      * @return ActiveQueryInterface the newly created [[ActiveQueryInterface|ActiveQuery]] instance.
-     * @throws InvalidConfigException if there is no primary key defined.
+     * @throws \yii\base\InvalidConfigException if there is no primary key defined.
      * @internal
      */
     protected static function findByCondition($condition)
@@ -199,7 +192,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      *
      * @param Query $query
      * @return array
-     * @throws InvalidConfigException
+     * @throws \yii\base\InvalidConfigException
      * @since 2.0.17
      * @internal
      */
@@ -222,8 +215,8 @@ abstract class ActiveRecord extends BaseActiveRecord
      * @param array $condition condition to filter.
      * @param array $aliases
      * @return array filtered condition.
-     * @throws InvalidArgumentException in case array contains unsafe values.
-     * @throws InvalidConfigException
+     * @throws \yii\base\InvalidArgumentException in case array contains unsafe values.
+     * @throws \yii\base\InvalidConfigException
      * @since 2.0.15
      * @internal
      */
@@ -235,7 +228,7 @@ abstract class ActiveRecord extends BaseActiveRecord
 
         foreach ($condition as $key => $value) {
             if (is_string($key) && !in_array($db->quoteSql($key), $columnNames, true)) {
-                throw new InvalidArgumentException('Key "' . $key . '" is not a column name and can not be used as a filter');
+                throw new \yii\base\InvalidArgumentException('Key "' . $key . '" is not a column name and can not be used as a filter');
             }
             $result[$key] = is_array($value) ? array_values($value) : $value;
         }
@@ -249,7 +242,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * @param Connection $db
      * @param array $aliases
      * @return array
-     * @throws InvalidConfigException
+     * @throws \yii\base\InvalidConfigException
      * @since 2.0.17
      * @internal
      */
@@ -407,7 +400,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      */
     public static function find()
     {
-        return Yii::createObject(ActiveQuery::className(), [get_called_class()]);
+        return \Yii::createObject(ActiveQuery::className(), [get_called_class()]);
     }
 
     /**
@@ -420,13 +413,13 @@ abstract class ActiveRecord extends BaseActiveRecord
      */
     public static function tableName(): string
     {
-        return '{{%' . Inflector::camel2id(StringHelper::basename(get_called_class()), '_') . '}}';
+        return '{{%' . \yii\helpers\Inflector::camel2id(\yii\helpers\StringHelper::basename(get_called_class()), '_') . '}}';
     }
 
     /**
      * Returns the schema information of the DB table associated with this AR class.
      * @return TableSchema the schema information of the DB table associated with this AR class.
-     * @throws InvalidConfigException if the table for the AR class does not exist.
+     * @throws \yii\base\InvalidConfigException if the table for the AR class does not exist.
      */
     public static function getTableSchema()
     {
@@ -435,7 +428,7 @@ abstract class ActiveRecord extends BaseActiveRecord
             ->getTableSchema(static::tableName());
 
         if ($tableSchema === null) {
-            throw new InvalidConfigException('The table does not exist: ' . static::tableName());
+            throw new \yii\base\InvalidConfigException('The table does not exist: ' . static::tableName());
         }
 
         return $tableSchema;
@@ -558,7 +551,7 @@ abstract class ActiveRecord extends BaseActiveRecord
     public function insert($runValidation = true, $attributes = null)
     {
         if ($runValidation && !$this->validate($attributes)) {
-            Yii::info('Model not inserted due to validation error.', __METHOD__);
+            \Yii::info('Model not inserted due to validation error.', __METHOD__);
             return false;
         }
 
@@ -668,7 +661,7 @@ abstract class ActiveRecord extends BaseActiveRecord
     public function update($runValidation = true, $attributeNames = null)
     {
         if ($runValidation && !$this->validate($attributeNames)) {
-            Yii::info('Model not updated due to validation error.', __METHOD__);
+            \Yii::info('Model not updated due to validation error.', __METHOD__);
             return false;
         }
 
