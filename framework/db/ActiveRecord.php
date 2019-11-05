@@ -162,29 +162,29 @@ abstract class ActiveRecord extends BaseActiveRecord
      * @throws \yii\base\InvalidConfigException if there is no primary key defined.
      * @internal
      */
-    protected static function findByCondition($condition)
+    protected static function findByCondition(array $condition): \yii\db\ActiveQuery
     {
         $query = static::find();
 
-        if (!ArrayHelper::isAssociative($condition)) {
-            // query by primary key
-            $primaryKey = static::primaryKey();
-            if (isset($primaryKey[0])) {
-                $pk = $primaryKey[0];
-                if (!empty($query->join) || !empty($query->joinWith)) {
-                    $pk = static::tableName() . '.' . $pk;
-                }
-                // if condition is scalar, search for a single primary key, if it is array, search for multiple primary key values
-                $condition = [$pk => is_array($condition) ? array_values($condition) : $condition];
-            } else {
-                throw new InvalidConfigException('"' . get_called_class() . '" must have a primary key.');
-            }
-        } elseif (is_array($condition)) {
-            $aliases = static::filterValidAliases($query);
-            $condition = static::filterCondition($condition, $aliases);
+        if (\yii\helpers\ArrayHelper::isAssociative($condition)) {
+            return $query->andWhere(static::filterCondition($condition, static::filterValidAliases($query)));
         }
 
-        return $query->andWhere($condition);
+        // query by primary key
+        $primaryKey = static::primaryKey();
+
+        if (!isset($primaryKey[0])) {
+            throw new \yii\base\InvalidConfigException('"' . static::class . '" must have a primary key.');
+        }
+
+        $pk = $primaryKey[0];
+
+        if (!empty($query->join) || !empty($query->joinWith)) {
+            $pk = static::tableName() . '.' . $pk;
+        }
+
+        // if condition is scalar, search for a single primary key, if it is array, search for multiple primary key values
+        return $query->andWhere([$pk => array_values($condition)]);
     }
 
     /**
@@ -270,7 +270,7 @@ abstract class ActiveRecord extends BaseActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function refresh()
+    public function refresh(): bool
     {
         $query = static::find();
         $tableName = key($query->getTablesUsedInFrom());
@@ -317,7 +317,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * @param array $params the parameters (name => value) to be bound to the query.
      * @return int the number of rows updated
      */
-    public static function updateAll($attributes, $condition = '', $params = [])
+    public static function updateAll(array $attributes, $condition = '', array $params = []): int
     {
         $command = static::getDb()->createCommand();
         $command->update(static::tableName(), $attributes, $condition, $params);
@@ -344,7 +344,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * Do not name the parameters as `:bp0`, `:bp1`, etc., because they are used internally by this method.
      * @return int the number of rows updated
      */
-    public static function updateAllCounters($counters, $condition = '', $params = [])
+    public static function updateAllCounters(array $counters, $condition = '', array $params = []): int
     {
         $n = 0;
         foreach ($counters as $name => $value) {
@@ -386,7 +386,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * @param array $params the parameters (name => value) to be bound to the query.
      * @return int the number of rows deleted
      */
-    public static function deleteAll($condition = null, $params = [])
+    public static function deleteAll($condition = null, array $params = []): int
     {
         $command = static::getDb()->createCommand();
         $command->delete(static::tableName(), $condition, $params);
@@ -413,7 +413,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      */
     public static function tableName(): string
     {
-        return '{{%' . \yii\helpers\Inflector::camel2id(\yii\helpers\StringHelper::basename(get_called_class()), '_') . '}}';
+        return '{{%' . \yii\helpers\Inflector::camel2id(\yii\helpers\StringHelper::basename(static::class), '_') . '}}';
     }
 
     /**
@@ -447,7 +447,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      *
      * @return string[] the primary keys of the associated database table.
      */
-    public static function primaryKey()
+    public static function primaryKey(): array
     {
         return static::getTableSchema()->primaryKey;
     }
@@ -457,7 +457,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * The default implementation will return all column names of the table associated with this AR class.
      * @return array list of attribute names.
      */
-    public function attributes()
+    public function attributes(): array
     {
         return array_keys(static::getTableSchema()->columns);
     }
@@ -489,7 +489,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * @return array the declarations of transactional operations. The array keys are scenarios names,
      * and the array values are the corresponding transaction operations.
      */
-    public function transactions()
+    public function transactions(): array
     {
         return [];
     }
@@ -497,7 +497,7 @@ abstract class ActiveRecord extends BaseActiveRecord
     /**
      * {@inheritdoc}
      */
-    public static function populateRecord($record, $row)
+    public static function populateRecord(BaseActiveRecord $record, array $row): void
     {
         $columns = static::getTableSchema()->columns;
         foreach ($row as $name => $value) {
@@ -548,7 +548,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * @return bool whether the attributes are valid and the record is inserted successfully.
      * @throws \Exception|\Throwable in case insert failed.
      */
-    public function insert($runValidation = true, $attributes = null)
+    public function insert(bool $runValidation = true, ?array $attributes = null): bool
     {
         if ($runValidation && !$this->validate($attributes)) {
             \Yii::info('Model not inserted due to validation error.', __METHOD__);
@@ -584,13 +584,13 @@ abstract class ActiveRecord extends BaseActiveRecord
      * meaning all attributes that are loaded from DB will be saved.
      * @return bool whether the record is inserted successfully.
      */
-    protected function insertInternal($attributes = null)
+    protected function insertInternal(?array $attributes = null): bool
     {
         if (!$this->beforeSave(true)) {
             return false;
         }
         $values = $this->getDirtyAttributes($attributes);
-        if (($primaryKeys = static::getDb()->schema->insert(static::tableName(), $values)) === false) {
+        if (($primaryKeys = static::getDb()->getSchema()->insert(static::tableName(), $values)) === false) {
             return false;
         }
         foreach ($primaryKeys as $name => $value) {
@@ -658,7 +658,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * being updated is outdated.
      * @throws \Exception|\Throwable in case update failed.
      */
-    public function update($runValidation = true, $attributeNames = null)
+    public function update(bool $runValidation = true, ?array $attributeNames = null)
     {
         if ($runValidation && !$this->validate($attributeNames)) {
             \Yii::info('Model not updated due to validation error.', __METHOD__);
@@ -768,13 +768,14 @@ abstract class ActiveRecord extends BaseActiveRecord
      * @param ActiveRecord $record record to compare to
      * @return bool whether the two active records refer to the same row in the same database table.
      */
-    public function equals($record)
+    public function equals(BaseActiveRecord $record): bool
     {
-        if ($this->isNewRecord || $record->isNewRecord) {
+        if ($this->getIsNewRecord() || $record->getIsNewRecord()) {
             return false;
         }
 
-        return static::tableName() === $record->tableName() && $this->getPrimaryKey() === $record->getPrimaryKey();
+        return $record->tableName() === static::tableName()
+            && $record->getPrimaryKey() === $this->getPrimaryKey();
     }
 
     /**
@@ -782,7 +783,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * @param int $operation the operation to check. Possible values are [[OP_INSERT]], [[OP_UPDATE]] and [[OP_DELETE]].
      * @return bool whether the specified operation is transactional in the current [[scenario]].
      */
-    public function isTransactional($operation)
+    public function isTransactional(int $operation): bool
     {
         $scenario = $this->getScenario();
         $transactions = $this->transactions();

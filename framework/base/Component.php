@@ -131,7 +131,7 @@ class Component extends BaseObject
      * @throws InvalidCallException if the property is write-only.
      * @see __set()
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         $getter = 'get' . $name;
         if (method_exists($this, $getter)) {
@@ -172,7 +172,7 @@ class Component extends BaseObject
      * @throws InvalidCallException if the property is read-only.
      * @see __get()
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value): void
     {
         $setter = 'set' . $name;
         if (method_exists($this, $setter)) {
@@ -224,7 +224,7 @@ class Component extends BaseObject
      * @return bool whether the named property is set
      * @see https://secure.php.net/manual/en/function.isset.php
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         $getter = 'get' . $name;
         if (method_exists($this, $getter)) {
@@ -256,7 +256,7 @@ class Component extends BaseObject
      * @throws InvalidCallException if the property is read only.
      * @see https://secure.php.net/manual/en/function.unset.php
      */
-    public function __unset($name)
+    public function __unset(string $name): void
     {
         $setter = 'set' . $name;
         if (method_exists($this, $setter)) {
@@ -349,7 +349,7 @@ class Component extends BaseObject
      * @return bool whether the property can be read
      * @see canSetProperty()
      */
-    public function canGetProperty($name, $checkVars = true, $checkBehaviors = true)
+    public function canGetProperty(string $name, bool $checkVars = true, bool $checkBehaviors = true): bool
     {
         if (method_exists($this, 'get' . $name) || $checkVars && property_exists($this, $name)) {
             return true;
@@ -381,7 +381,7 @@ class Component extends BaseObject
      * @return bool whether the property can be written
      * @see canGetProperty()
      */
-    public function canSetProperty($name, $checkVars = true, $checkBehaviors = true)
+    public function canSetProperty(string $name, bool $checkVars = true, bool $checkBehaviors = true): bool
     {
         if (method_exists($this, 'set' . $name) || $checkVars && property_exists($this, $name)) {
             return true;

@@ -211,7 +211,7 @@ class Order extends ActiveRecord
             ->via('orderItems');
     }
 
-    public function beforeSave($insert)
+    public function beforeSave(bool $insert): bool
     {
         if (parent::beforeSave($insert)) {
             $this->created_at = time();

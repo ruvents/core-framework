@@ -90,7 +90,7 @@ class DynamicModel extends Model
     /**
      * {@inheritdoc}
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value): void
     {
         if ($this->hasAttribute($name)) {
             $this->_attributes[$name] = $value;
@@ -102,7 +102,7 @@ class DynamicModel extends Model
     /**
      * {@inheritdoc}
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         if ($this->hasAttribute($name)) {
             return isset($this->_attributes[$name]);
@@ -114,7 +114,7 @@ class DynamicModel extends Model
     /**
      * {@inheritdoc}
      */
-    public function __unset($name)
+    public function __unset(string $name): void
     {
         if ($this->hasAttribute($name)) {
             unset($this->_attributes[$name]);
@@ -126,7 +126,7 @@ class DynamicModel extends Model
     /**
      * {@inheritdoc}
      */
-    public function canGetProperty($name, $checkVars = true, $checkBehaviors = true)
+    public function canGetProperty(string $name, bool $checkVars = true, bool $checkBehaviors = true): bool
     {
         return parent::canGetProperty($name, $checkVars, $checkBehaviors) || $this->hasAttribute($name);
     }
@@ -134,7 +134,7 @@ class DynamicModel extends Model
     /**
      * {@inheritdoc}
      */
-    public function canSetProperty($name, $checkVars = true, $checkBehaviors = true)
+    public function canSetProperty(string $name, bool $checkVars = true, bool $checkBehaviors = true): bool
     {
         return parent::canSetProperty($name, $checkVars, $checkBehaviors) || $this->hasAttribute($name);
     }

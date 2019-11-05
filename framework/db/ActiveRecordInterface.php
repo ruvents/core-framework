@@ -43,7 +43,7 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * @return mixed the attribute value. `null` if the attribute is not set or does not exist.
      * @see hasAttribute()
      */
-    public function getAttribute($name);
+    public function getAttribute(string $name);
 
     /**
      * Sets the named attribute value.
@@ -51,14 +51,14 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * @param mixed $value the attribute value.
      * @see hasAttribute()
      */
-    public function setAttribute($name, $value);
+    public function setAttribute(string $name, $value): void;
 
     /**
      * Returns a value indicating whether the record has an attribute with the specified name.
      * @param string $name the name of the attribute
      * @return bool whether the record has an attribute with the specified name.
      */
-    public function hasAttribute($name);
+    public function hasAttribute(string $name): bool;
 
     /**
      * Returns the primary key value(s).
@@ -69,7 +69,7 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * is composite or `$asArray` is true. A string is returned otherwise (`null` will be returned if
      * the key value is `null`).
      */
-    public function getPrimaryKey($asArray = false);
+    public function getPrimaryKey(bool $asArray = false);
 
     /**
      * Returns the old primary key value(s).
@@ -86,14 +86,14 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * is composite or `$asArray` is true. A string is returned otherwise (`null` will be returned if
      * the key value is `null`).
      */
-    public function getOldPrimaryKey($asArray = false);
+    public function getOldPrimaryKey(bool $asArray = false);
 
     /**
      * Returns a value indicating whether the given set of attributes represents the primary key for this model.
      * @param array $keys the set of attributes to check
      * @return bool whether the given set of attributes represents the primary key for this model
      */
-    public static function isPrimaryKey($keys);
+    public static function isPrimaryKey(array $keys);
 
     /**
      * Creates an [[ActiveQueryInterface]] instance for query purpose.
@@ -214,7 +214,7 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * @param mixed $condition primary key value or a set of column values
      * @return static|null ActiveRecord instance matching the condition, or `null` if nothing matches.
      */
-    public static function findOne($condition);
+    public static function findOne(array $condition);
 
     /**
      * Returns a list of active record models that match the specified primary key value(s) or a set of column values.
@@ -281,7 +281,7 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * @param mixed $condition primary key value or a set of column values
      * @return array an array of ActiveRecord instance, or an empty array if nothing matches.
      */
-    public static function findAll($condition);
+    public static function findAll(array $condition);
 
     /**
      * Updates records using the provided attribute values and conditions.
@@ -299,7 +299,7 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * An empty condition will match all records.
      * @return int the number of rows updated
      */
-    public static function updateAll($attributes, $condition = null);
+    public static function updateAll(array $attributes, $condition = null);
 
     /**
      * Deletes records using the provided conditions.
@@ -340,7 +340,7 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * meaning all attributes that are loaded from DB will be saved.
      * @return bool whether the saving succeeded (i.e. no validation errors occurred).
      */
-    public function save($runValidation = true, $attributeNames = null);
+    public function save(bool $runValidation = true, ?array $attributeNames = null): bool;
 
     /**
      * Inserts the record into the database using the attribute values of this record.
@@ -361,7 +361,7 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * meaning all attributes that are loaded from DB will be saved.
      * @return bool whether the attributes are valid and the record is inserted successfully.
      */
-    public function insert($runValidation = true, $attributes = null);
+    public function insert(bool $runValidation = true, ?array $attributes = null): bool;
 
     /**
      * Saves the changes to this active record into the database.
@@ -385,7 +385,7 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * Note that it is possible that the number of rows affected is 0, even though the
      * update execution is successful.
      */
-    public function update($runValidation = true, $attributeNames = null);
+    public function update(bool $runValidation = true, ?array $attributeNames = null);
 
     /**
      * Deletes the record from the database.
@@ -407,7 +407,7 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * @param static $record record to compare to
      * @return bool whether the two active records refer to the same row in the same database table.
      */
-    public function equals($record);
+    public function equals(BaseActiveRecord $record);
 
     /**
      * Returns the relation object with the specified name.
@@ -418,7 +418,7 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * @param bool $throwException whether to throw exception if the relation does not exist.
      * @return ActiveQueryInterface the relational query object
      */
-    public function getRelation($name, $throwException = true);
+    public function getRelation(string $name, bool $throwException = true): ActiveQueryInterface;
 
     /**
      * Populates the named relation with the related records.
@@ -427,7 +427,7 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * @param ActiveRecordInterface|array|null $records the related records to be populated into the relation.
      * @since 2.0.8
      */
-    public function populateRelation($name, $records);
+    public function populateRelation(string $name, $records): void;
 
     /**
      * Establishes the relationship between two records.
@@ -447,7 +447,7 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * This parameter is only meaningful for a relationship involving a junction table
      * (i.e., a relation set with [[ActiveQueryInterface::via()]]).
      */
-    public function link($name, $model, $extraColumns = []);
+    public function link(string $name, ActiveRecordInterface $model, array $extraColumns = []): void;
 
     /**
      * Destroys the relationship between two records.
@@ -461,7 +461,7 @@ interface ActiveRecordInterface extends StaticInstanceInterface
      * If false, the model's foreign key will be set `null` and saved.
      * If true, the model containing the foreign key will be deleted.
      */
-    public function unlink($name, $model, $delete = false);
+    public function unlink(string $name, ActiveRecordInterface $model, bool $delete = false): void;
 
     /**
      * Returns the connection used by this AR class.

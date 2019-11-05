@@ -87,7 +87,7 @@ class Customer extends ActiveRecord
         })->orderBy('id');
     }
 
-    public function afterSave($insert, $changedAttributes)
+    public function afterSave(bool $insert, array $changedAttributes): void
     {
         ActiveRecordTest::$afterSaveInsert = $insert;
         ActiveRecordTest::$afterSaveNewRecord = $this->isNewRecord;

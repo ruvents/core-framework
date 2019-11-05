@@ -83,7 +83,7 @@ class ServiceLocator extends Component
      * @param string $name the property name or the event name
      * @return bool whether the property value is null
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         if ($this->has($name)) {
             return true;

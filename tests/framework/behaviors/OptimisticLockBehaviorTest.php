@@ -295,7 +295,7 @@ class ActiveRecordLockVersion extends ActiveRecord
         return static::$behaviors;
     }
 
-    public function optimisticLock()
+    public function optimisticLock(): ?string
     {
         return static::$lockAttribute;
     }

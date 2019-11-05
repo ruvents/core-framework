@@ -130,7 +130,7 @@ class ActiveRecordBlameableConsole extends ActiveRecord
         return $this->getBehavior('blameable');
     }
 
-    public static function primaryKey()
+    public static function primaryKey(): array
     {
         return ['name'];
     }

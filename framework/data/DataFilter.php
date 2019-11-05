@@ -765,7 +765,7 @@ class DataFilter extends Model
     /**
      * {@inheritdoc}
      */
-    public function canGetProperty($name, $checkVars = true, $checkBehaviors = true)
+    public function canGetProperty(string $name, bool $checkVars = true, bool $checkBehaviors = true): bool
     {
         if ($name === $this->filterAttributeName) {
             return true;
@@ -776,7 +776,7 @@ class DataFilter extends Model
     /**
      * {@inheritdoc}
      */
-    public function canSetProperty($name, $checkVars = true, $checkBehaviors = true)
+    public function canSetProperty(string $name, bool $checkVars = true, bool $checkBehaviors = true): bool
     {
         if ($name === $this->filterAttributeName) {
             return true;
@@ -799,7 +799,7 @@ class DataFilter extends Model
     /**
      * {@inheritdoc}
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value): void
     {
         if ($name === $this->filterAttributeName) {
             $this->setFilter($value);
@@ -811,7 +811,7 @@ class DataFilter extends Model
     /**
      * {@inheritdoc}
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         if ($name === $this->filterAttributeName) {
             return $this->getFilter() !== null;
@@ -823,7 +823,7 @@ class DataFilter extends Model
     /**
      * {@inheritdoc}
      */
-    public function __unset($name)
+    public function __unset(string $name): void
     {
         if ($name === $this->filterAttributeName) {
             $this->setFilter(null);
