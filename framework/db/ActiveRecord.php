@@ -162,7 +162,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * @throws \yii\base\InvalidConfigException if there is no primary key defined.
      * @internal
      */
-    protected static function findByCondition(array $condition): \yii\db\ActiveQuery
+    protected static function findByCondition($condition): \yii\db\ActiveQuery
     {
         $query = static::find();
 
