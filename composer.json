@@ -84,7 +84,8 @@
         "phpunit/phpunit": "8.4.2",
         "cebe/indent": "1.0.2",
         "friendsofphp/php-cs-fixer": "2.15.3",
-        "johnkary/phpunit-speedtrap": "3.1.0"
+        "johnkary/phpunit-speedtrap": "3.1.0",
+        "mikey179/vfsstream": "1.6.8"
     },
     "repositories": [
         {
